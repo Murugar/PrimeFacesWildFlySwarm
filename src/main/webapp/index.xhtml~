@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+    </h:head>  
+
+    <h:body>
+        <h:form id="form">
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Title:" for="title" />
+                <p:inputText id="title" placeholder="title" value="#{bookController.book.title}" required="true" />
+                <h:outputLabel value="Release date:" for="rdate" />
+                <p:calendar id="rdate" value="#{bookController.book.releaseDate}" required="true" />
+                <p:commandButton action="#{bookController.saveBook()}" value="add" update="dt, form" />
+                <h:messages />
+            </h:panelGrid>
+        </h:form>
+        <p:dataTable id="dt" value="#{bookController.books}" var="b">
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Title" />
+                </f:facet>
+                <h:outputText value="#{b.title}" />
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Release Date" />
+                </f:facet>
+                <h:outputText value="#{b.releaseDate}">
+                    <f:convertDateTime pattern="dd.MM.YYYY" timeZone="CET" />
+                </h:outputText>
+            </p:column>
+        </p:dataTable>
+    </h:body>
+</html>
